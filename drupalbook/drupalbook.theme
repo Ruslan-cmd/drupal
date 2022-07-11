@@ -1,0 +1,36 @@
+<?php
+
+/**
+ * @file
+ * Bootstrap sub-theme.
+ *
+ * Place your custom PHP code in this file.
+ */
+/**
+* Implements hook_theme_suggestions_alter().
+*/
+function drupalbook_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
+if ($hook == 'views_view') {
+$suggestions[] = 'views_view__'. $variables['view']->id();
+}
+if ($hook === 'views_exposed_form') {
+$suggestions[] =  str_replace('-', '_', $variables['form']['#id']);
+}
+if ($hook === 'select') {
+$suggestions[] = 'select__'. str_replace('-', '_', $variables['element']['#id']);
+}
+if ($hook === 'form') {
+$suggestions[] = 'form__'. str_replace('-', '_', $variables['element']['#id']);
+}
+if ($hook === 'form_element_label') {
+$suggestions[] = 'form_element_label__'. str_replace('-', '_', $variables['element']['#id']);
+}
+}
+
+/**
+* Implementing hook_preprocess().
+*/
+function drupalbook_preprocess_paragraph__slide(&$variables, $hook){
+if ($hook == 'paragraph'){
+}
+}

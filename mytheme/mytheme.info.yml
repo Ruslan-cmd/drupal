@@ -1,0 +1,9 @@
+type: theme
+base theme: seven
+core: 8.x
+core_version_requirement: ^8 || ^9
+name: 'mytheme'
+description: 'A Drupal Bootstrap 3 based sub-theme.'
+package: 'Bootstrap'
+libraries:
+  - mytheme/mylibrary

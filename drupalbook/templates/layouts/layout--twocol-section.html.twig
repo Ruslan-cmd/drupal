@@ -1,0 +1,85 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a two-column layout.
+ *
+ * Available variables:
+ * - content: The content for this layout.
+ * - attributes: HTML attributes for the layout <div>.
+ *
+ * @ingroup themeable
+ */
+#}
+{% if content %}
+{%  if (settings['label'] == 'Boxblock') %}
+   <div class="container py-5 second">
+
+    <h2 class="text-align-center second__title">More cards</h2>
+<br>
+    <div class="row row-cols-1 row-cols-lg-2 row-cols-lg-2 g-4">
+
+    {% if content.first %}
+      
+        {{ content.first }}
+   
+    {% endif %}
+
+    {% if content.second %}
+        {{ content.second }}
+    {% endif %}
+</div>
+  </div>
+
+{%  elseif (settings['label'] == 'My-block') %}
+<div class="col-12 my-5 w-100 m-0 third">
+<div class="container">
+<div class="card border-0 third__card">
+<div class="row g-0 justify-content-between d-flex">
+
+    {% if content.first %}
+      
+        {{ content.first }}
+      
+    {% endif %}
+
+    {% if content.second %}
+      <div class="col-md-4 py-5 px-0 d-flex justify-content-end">
+        {{ content.second }}
+      </div>
+    {% endif %}
+</div>
+</div>
+</div>
+ </div>
+{%  elseif (settings['label'] == 'Product_full_content') %}
+<div class="container">
+<div{{ attributes }}>
+{% if content.first %}
+      <div {{ region_attributes.first.addClass('layout__region', 'layout__region--first') }}>
+        {{ content.first }}
+      </div>
+    {% endif %}
+
+    {% if content.second %}
+      <div {{ region_attributes.second.addClass('layout__region', 'layout__region--second') }}>
+{{ content.second }}
+      </div>
+    {% endif %}
+</div>
+</div>
+{% else %}
+ <div{{ attributes }}>
+    {% if content.first %}
+      <div {{ region_attributes.first.addClass('layout__region', 'layout__region--first') }}>
+        {{ content.first }}
+      </div>
+    {% endif %}
+
+    {% if content.second %}
+      <div {{ region_attributes.second.addClass('layout__region', 'layout__region--second') }}>
+       
+{{ content.second }}
+      </div>
+    {% endif %}
+{% endif %}
+{% endif %}

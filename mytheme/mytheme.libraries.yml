@@ -1,0 +1,14 @@
+mylibrary:
+  version: 1.x
+  js:
+    js/script.js: {}
+  dependencies:
+    - core/jquery
+    - jquery_ui_tabs/tabs
+test:
+  version: 1.x
+  js:
+    js/script1.js: { }
+  dependencies:
+    - core/jquery
+    - jquery_ui_tabs/tabs

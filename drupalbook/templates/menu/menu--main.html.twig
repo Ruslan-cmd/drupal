@@ -1,0 +1,51 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a menu.
+ *
+ * Available variables:
+ * - classes: A list of classes to apply to the top level <ul> element.
+ * - dropdown_classes: A list of classes to apply to the dropdown <ul> element.
+ * - menu_name: The machine name of the menu.
+ * - items: A nested list of menu items. Each menu item contains:
+ *   - attributes: HTML attributes for the menu item.
+ *   - below: The menu item child items.
+ *   - title: The menu link title.
+ *   - url: The menu link url, instance of \Drupal\Core\Url
+ *   - localized_options: Menu link localized options.
+ *
+ * @ingroup templates
+ */
+#}
+{% macro menu_links(items, attributes, menu_level, classes, dropdown_classes) %}
+{% if items %}
+<ul class="navbar-nav mr-auto justify-content-between dropdown-menu-dark w-100">
+{% for item in items %}
+{% if item.below %}
+          <li class="nav-item dropdown-menu-dark dropdown">
+            <a href="#" class="nav-item px-2 nav-link dropdown-toggle px-xl-4" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {{item.title}}
+            </a>
+            <ul class="dropdown-menu bg-dark p-0">
+{% for concrete_item in item.below %}
+              <li class="nav-item dropdown-menu-dark">
+                <a href="{{concrete_item.url}}" class="px-2 dropdown-item nav-link px-xl-4">{{concrete_item.title}}</a>
+              </li>
+{% endfor %}
+            </ul>
+          </li>
+{% else %}
+          <li class="nav-item dropdown-menu-dark">
+            <a href="{{item.url}}" class="nav-item px-2 nav-link px-xl-4">{{item.title}}</a>
+          </li>
+{% endif %}
+{% endfor %}
+</ul>
+{% endif %}
+{% endmacro %}
+{#
+  Invoke the custom macro defined above. If classes were provided, use them.
+  This allows the template to be extended without having to also duplicate the
+  code above. @see http://twig.sensiolabs.org/doc/tags/macro.html
+#}
+{{ _self.menu_links(items, attributes, 0, classes ?: ['menu', 'menu--' ~ menu_name|clean_class, 'nav'], dropdown_classes ?: ['dropdown-menu']) }}

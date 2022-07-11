@@ -1,0 +1,42 @@
+<?php
+
+
+use Drupal\Core\Cache\CacheableMetadata;
+
+function mytheme_preprocess_node__people__full(&$variables)
+{
+  //задаю кеш контекст для кеширования с разными параметрами
+  $variables['#cache'] =  ([
+      'contexts' => ['url.query_args'],
+  ]);
+  //проверяю вызываю параметр введеный пользователем
+  $param = \Drupal::request()->query;
+  $key = $param->get('tab');
+
+  $variables['test'] = false;
+  //если параметр равен films - вызываю код js который делает клик на таб фильмов
+    if ($key == 'films'){
+      $variables['#attached']['library'][] = 'mytheme/test';
+  }
+    // задаю переменные, которые являются полями ноды текущей
+  $variables['name'] = $variables['elements']['#node']->get('field_name')->value;
+  $variables['height'] = $variables['elements']['#node']->get('field_height')->value;
+  $variables['mass'] = $variables['elements']['#node']->get('field_mass')->value;
+  $variables['hair_color'] = $variables['elements']['#node']->get('field_hair_color')->value;
+  $variables['skin_color'] = $variables['elements']['#node']->get('field_skin_color')->value;
+  $variables['eye_color'] = $variables['elements']['#node']->get('field_eye_color')->value;
+  $variables['birth_year'] = $variables['elements']['#node']->get('field_birth_year')->value;
+  $variables['gender'] = $variables['elements']['#node']->get('field_gender')->value;
+//получаю заголовок связанной сущности родной планеты
+ $homeworld_array =  $variables['elements']['#node']->field_homeworld->referencedEntities();
+ foreach ($homeworld_array as $key => $value){
+   $value = $value->getTitle();
+ }
+  $variables['homeworld'] = $value;
+  //получаю заголовок связанной сущности фильмов, закидыаю в массив, чтобы правильно вывести в шаблне уже
+  $films_array =  $variables['elements']['#node']->field_films->referencedEntities();
+  foreach ($films_array as $key => $value){
+    $value_films[] = $value->getTitle();
+  }
+  $variables['films'] = $value_films;
+}

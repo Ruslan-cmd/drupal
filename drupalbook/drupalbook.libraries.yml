@@ -1,0 +1,5 @@
+framework:
+  css:
+    theme:
+      css/style.css: {}
+      css/style2.css: {}

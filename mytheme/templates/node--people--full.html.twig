@@ -1,0 +1,27 @@
+<div id="tabs" class="ui-tabs">
+
+  <ul>
+    <li><a href="#tabs-1">Общая информация</a></li>
+    <li><a href="#tabs-2">Фильмы</a></li>
+  </ul>
+
+    <div id="tabs-1">
+
+    <p> Имя: {{ name }} </p>
+    <p>  Рост: {{ height }}  </p>
+    <p> Масса: {{ mass }}  </p>
+    <p> Цвет волос: {{ hair_color }}  </p>
+    <p> Цвет кожи: {{ skin_color }}  </p>
+    <p> Цвет глаз: {{ eye_color }}  </p>
+    <p> Дата рождения: {{ birth_year }}  </p>
+    <p> Пол: {{ gender }}  </p>
+    <p> Родная планета: {{ homeworld }}  </p>
+
+  </div>
+  <div id="tabs-2">
+    Фильмы:
+    {% for film in films %}
+    <p> {{ film }}  </p>
+    {% endfor %}
+  </div>
+</div>

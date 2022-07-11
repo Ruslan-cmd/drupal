@@ -1,0 +1,35 @@
+{#
+/**
+ * @file
+ * Default theme implementation for a breadcrumb trail.
+ *
+ * Available variables:
+ * - breadcrumb: Breadcrumb trail items.
+ *
+ * @ingroup templates
+ */
+#}
+{% if breadcrumb %}
+<div class="bg-dark col-12">
+  <div class="container bg-dark">
+    <nav aria-label="breadcrumb">
+  <ol class="breadcrumb m-0 align-items-center">
+    {% for item in breadcrumb %}
+      {% if item.url== "/"  %}
+<li class="breadcrumb-item>
+
+          <a href="{{ item.url }}"><img class="img-fluid" src="/{{ directory }}/home.png" alt="home" width=28></a>
+ </li>
+        {% else %}
+           {% if item.url %}
+             <li class="breadcrumb-item"><a href="{{ item.url }}">{{ item.text }}</a></li>
+            {% else %}
+             <li class="breadcrumb-item active" aria-current="page">{{ item.text }}</li>
+           {% endif %}
+        {% endif %}
+    {% endfor %}
+  </ol>
+</nav>
+</div>
+</div>
+{% endif %}

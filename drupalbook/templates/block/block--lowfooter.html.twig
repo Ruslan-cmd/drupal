@@ -1,0 +1,61 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a block.
+ *
+ * Available variables:
+ * - $block->subject: Block title.
+ * - $content: Block content.
+ * - $block->module: Module that generated the block.
+ * - $block->delta: An ID for the block, unique within each module.
+ * - $block->region: The block region embedding the current block.
+ * - $classes: String of classes that can be used to style contextually through
+ *   CSS. It can be manipulated through the variable $classes_array from
+ *   preprocess functions. The default values can be one or more of the
+ *   following:
+ *   - block: The current template type, i.e., "theming hook".
+ *   - block-[module]: The module generating the block. For example, the user
+ *     module is responsible for handling the default user navigation block. In
+ *     that case the class would be 'block-user'.
+ * - $title_prefix (array): An array containing additional output populated by
+ *   modules, intended to be displayed in front of the main title tag that
+ *   appears in the template.
+ * - $title_suffix (array): An array containing additional output populated by
+ *   modules, intended to be displayed after the main title tag that appears in
+ *   the template.
+ *
+ * Helper variables:
+ * - $classes_array: Array of html class attribute values. It is flattened
+ *   into a string within the variable $classes.
+ * - $block_zebra: Outputs 'odd' and 'even' dependent on each block region.
+ * - $zebra: Same output as $block_zebra but independent of any block region.
+ * - $block_id: Counter dependent on each block region.
+ * - $id: Same output as $block_id but independent of any block region.
+ * - $is_front: Flags true when presented in the front page.
+ * - $logged_in: Flags true when the current user is a logged-in member.
+ * - $is_admin: Flags true when the current user is an administrator.
+ * - $block_html_id: A valid HTML ID and guaranteed unique.
+ *
+ * @ingroup templates
+ *
+ * @see bootstrap_preprocess_block()
+ * @see template_preprocess()
+ * @see template_preprocess_block()
+ * @see bootstrap_process_block()
+ * @see template_process()
+ */
+#}
+
+<div class="footer__bottom d-flex flex-column-reverse flex-md-row mt-5 border-top justify-content-between align-items-md-center py-3">
+<div class="footer__copy col-5 col-md-3">© Bootcamp 2022</div>
+
+<div class="col-12 col-md-9 d-flex align-items-center justify-content-md-end mb-3 mb-md-0">
+<div class="navbar-brand d-flex align-items-center col-md-5"><a class="site-logo d-block" href="/"><img alt="" src="/sites/default/files/inline-images/favicon.png" /> </a>
+
+<div>
+<a class="site-title" href="/">Bootcamp</a>
+</div>
+</div>
+<a class="col-2" href="#"><img alt="" class="img-fluid w-100" src="/sites/default/files/inline-images/i20-logo.png" /></a> <a class="col-1 mx-3" href="#"><img alt="" class="img-fluid w-100" src="/sites/default/files/inline-images/drupaljedi-logo_0.png" /></a></div>
+</div>
+
