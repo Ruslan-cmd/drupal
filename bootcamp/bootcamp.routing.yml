@@ -1,0 +1,14 @@
+bootcamptest1.thank_you:
+  path: '/thank-you'
+  defaults:
+    _controller: '\Drupal\bootcamp\Controller\FirstPage::content'
+    _title: 'Thanks for you answer'
+  requirements:
+    _permission: 'access content'
+bootcamp.settings:
+  path: '/admin/config/bootcamp/settings'
+  defaults:
+    _form: '\Drupal\bootcamp\Form\BootcampSettingsForm'
+    _title: 'Bootcamp Settings form'
+  requirements:
+    _permission: 'administer site configuration'

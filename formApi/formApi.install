@@ -1,0 +1,43 @@
+<?php
+use Drupal\Core\Database\Database;
+
+/**
+ * Implements hook_schema().
+ */
+function formApi_schema(){
+    $schema['students'] = array(
+        'description' => 'The table for storing the students data.',
+        'fields' => array(
+            'id' => array(
+                'description' => 'The primary identifier for row',
+                'type' => 'serial',
+                'not null' => TRUE,
+                'unsigned' => TRUE,
+            ),
+            'name' => array(
+                'description' => 'Name',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => '',
+            ),
+           'email' => array(
+                'description' => 'Email',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => '',
+            ),
+            'site_address' => array(
+                            'description' => 'Site address',
+                            'type' => 'varchar',
+                            'length' => 255,
+                            'not null' => TRUE,
+                            'default' => '',
+                        ),
+
+        ),
+        'primary key' => array('id'),
+    );
+    return $schema;
+}

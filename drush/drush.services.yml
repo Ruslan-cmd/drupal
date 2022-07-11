@@ -1,0 +1,9 @@
+services:
+  drush.commands:
+    class: \Drupal\drush\Commands\BatchCommands
+    tags:
+      - { name: drush.command }
+  batch.service:
+    class: \Drupal\drush\BatchService
+    tags:
+      - { name: batch.service }

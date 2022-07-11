@@ -1,0 +1,10 @@
+localtask.tab.swapi:
+  path: '/node/{node}/swapi'
+  defaults:
+    _controller: '\Drupal\localtask\Controller\DrupalLocalTask::swapi'
+  requirements:
+    _custom_access: '\Drupal\localtask\Controller\DrupalLocalTask::access'
+  options:
+    parameters:
+      node:
+        type: 'entity:node'

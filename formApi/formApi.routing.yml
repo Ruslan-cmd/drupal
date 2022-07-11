@@ -1,0 +1,7 @@
+formApi.form:
+  path: '/formApi'
+  defaults:
+    _form: '\Drupal\formApi\Form\FormApiTask'
+    _title: 'Form API'
+  requirements:
+    _permission: 'access content'

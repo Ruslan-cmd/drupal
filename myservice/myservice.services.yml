@@ -1,0 +1,4 @@
+services:
+  myservice.my:
+    class: Drupal\myservice\Controller\MyService
+    arguments: ['@http_client']

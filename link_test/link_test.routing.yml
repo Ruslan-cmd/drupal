@@ -1,0 +1,7 @@
+bootcamptest1.thank_you:
+  path: '/link-task'
+  defaults:
+    _controller: '\Drupal\link_test\Controller\LinkPage::content'
+    _title: 'Thanks for you answer'
+  requirements:
+    _permission: 'access content'

@@ -1,0 +1,44 @@
+<?php
+
+/**
+ * @file
+ */
+
+use Drupal\node\Entity\Node;
+use Drupal\Core\Entity\EntityInterface;
+/**
+ * Implements hook_cron().
+ */
+
+function myservice_cron()
+
+{
+  $queue = \Drupal::queue('my_test_queue'); //объявляю очередь
+  $queue->createQueue();
+  $request = \Drupal::service('myservice.my')->getResult('https://swapi.dev/api/');
+ // $result = $request->results; // выкинул служебную информацию
+  foreach ($request as $row_item){
+    $queue->createItem($row_item);
+  }
+  /**
+   * Implements hook_form_alter().
+   */
+
+}
+
+function myservice_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  if ($form_id == 'contact_message_contact_form_form') {
+    $current_user = \Drupal::currentUser();
+    $user = \Drupal\user\Entity\User::load($current_user->id());
+    $name  = $user->get('name')->value;
+    $user_last_name =  $user->field_last_name->value;
+    $form['field_last_name']['widget'][0]['value']['#default_value'] = $user_last_name;
+    $form['field_name']['widget'][0]['value']['#default_value'] = $name;
+  }
+
+  if ($form_id == 'views_exposed_form' and $form['#id'] == 'views-exposed-form-people-page-1') {
+    $form["actions"]["reset"]["#access"] = true;
+  }
+
+}
+

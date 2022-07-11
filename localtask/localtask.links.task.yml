@@ -1,0 +1,5 @@
+localtask.tab.swapi:
+  route_name: localtask.tab.swapi
+  title: Swapi tab
+  base_route: entity.node.canonical
+  weight: 100

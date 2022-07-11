@@ -1,0 +1,34 @@
+<?php
+
+/**
+ * Implements hook_theme().
+ */
+function formApi_theme($existing, $type, $theme, $path) {
+  return [
+    'form_theme' => [
+      'variables' => [
+        'result' => '' ,
+      ],
+    ],
+  ];
+}
+/**
+ * Implements template_preprocess_HOOK().
+ * Обработчик переменных для первого примера.
+ */
+function template_preprocess_form_theme(&$variables) {
+
+  $myConfigPage = \Drupal\config_pages\Entity\ConfigPages::config('custom_config');
+  $variables['string_modal'] = $myConfigPage->get('field_modal_title')->value;
+  $current_user = \Drupal::currentUser();
+  $user = \Drupal\user\Entity\User::load($current_user->id());
+  $name  = $user->get('name')->value;
+  $user_last_name =  $user->field_last_name->value;
+  if ($name == NULL){
+
+    $variables['result'] = $variables['string_modal'].", гость!";
+  }
+  else {
+    $variables['result'] = $variables['string_modal']. ', ' . $user_last_name. ' ' .$name;
+  }
+}

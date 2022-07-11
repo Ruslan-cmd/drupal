@@ -1,0 +1,7 @@
+drush.settings:
+  path: '/admin/config/bootcamp/drush'
+  defaults:
+    _form: '\Drupal\drush\Form\DrushSettingsForm'
+    _title: 'Drush Settings form'
+  requirements:
+    _permission: 'administer site configuration'

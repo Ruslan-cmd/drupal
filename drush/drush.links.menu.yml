@@ -1,0 +1,5 @@
+drush.admin:
+  title: 'Drush admin'
+  description: 'drush ex'
+  parent: system.admin_config_development
+  route_name: drush.settings

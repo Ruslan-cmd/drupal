@@ -1,0 +1,57 @@
+<?php
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\node\NodeInterface;
+/**
+ * Implements hook_node_access().
+ */
+//хук для сокрытия кнопки редактирования для пользователей, которох нет в данной ноде в поле редакторы
+function role_node_access(\Drupal\node\NodeInterface $node, $op, \Drupal\Core\Session\AccountInterface $account) {
+  //получаю тип ноды текущей
+  $type = $node
+    ->bundle();
+// для одного
+    if (in_array('redaktory', $account->getRoles())){
+      if ($type == 'editor' && $op == 'update') {
+        //Узнать uid в поле ноды
+        $uid_role = $node->get('field_role')->target_id;
+        // id текущего пользователя
+        $uid_now = $account->id();
+        //сравниваю айдишники и если равны то разрешаю доступ на редактирование
+        if ($uid_now == $uid_role) {
+          return AccessResult::allowed(); //изменить ,, нужно ли запретить
+        }
+      }
+    }
+  return AccessResult::neutral();
+}
+/**
+ * Implements hook_form_alter().
+ */
+
+function role_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  // если у меня форма редактирования ноды  - редакторы это поле не видят и не могут менять
+  if ($form_id == 'node_editor_edit_form') {
+    $current_user = \Drupal::currentUser();
+    if (in_array('redaktory',  $current_user->getRoles())){
+      $form['field_role']['#access'] = false;  // запрещаю доступ к полю
+    }
+
+  }
+  if ($form_id == 'node_editor_form') { // если форма создания ноды -  так же запрещаю видеть это поле редакторам
+    $current_user = \Drupal::currentUser();
+    if (in_array('redaktory',  $current_user->getRoles())){
+      $form['field_role']['#access'] = false;
+    }
+  }
+}
+// хук позволяет вставить текущего редактора в поле, ведь у меня поле редактора скрыто
+function role_node_insert(Drupal\Core\Entity\EntityInterface $entity)
+{
+  $current_user = \Drupal::currentUser();
+ // $entity->field_role->value = $current_user->id();
+  if (in_array('redaktory',  $current_user->getRoles())) {
+    $entity->set('field_role', $current_user->id());
+    $entity->save();
+  }
+}

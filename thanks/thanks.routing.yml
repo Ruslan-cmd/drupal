@@ -1,0 +1,7 @@
+thanks.test-page:
+  path: '/test-page'
+  defaults:
+    _controller: '\Drupal\thanks\Controller\TestPage::content'
+    _title: 'Test'
+  requirements:
+    _permission: 'access content'
